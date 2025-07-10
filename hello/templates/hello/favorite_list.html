@@ -1,0 +1,24 @@
+{% extends "hello/layout.html" %}
+{% block content %}
+    <h2>Suggested/Favorite Movies</h2>
+    <div class="card-container">
+        {% for movie in movies %}
+        <div class="movie-card">
+            <div class="movie-image" onclick="window.open('{{ movie.youtube_trailer }}', '_blank')">
+                <img src="{{ movie.image_url }}" alt="{{ movie.name }}">
+            </div>
+            <div class="movie-info">
+                <h3>{{ movie.name }}</h3>
+                <div class="movie-rating">⭐ {{ movie.rating }}</div>
+                <div class="movie-date">{{ movie.release_date }}</div>
+                <form method="post" action="{% url 'delete_movie' movie.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <p>No favorite movies found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

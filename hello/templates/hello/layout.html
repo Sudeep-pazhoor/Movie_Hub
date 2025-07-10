@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Deep-Hub</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hello/site.css' %}"/>
+</head>
+<body class="dark-theme">
+    <header class="header">
+        <span class="site-title">Deep-Hub</span>
+        <nav>
+            <a href="{% url 'movie_list' %}">Theater List</a>
+            <a href="{% url 'favorite_list' %}">Suggested/Fav List</a>
+        </nav>
+        <form method="get" action="{% url 'movie_list' %}" class="search-bar">
+            <input type="text" name="q" placeholder="Search movies..." value="{{ query|default:'' }}">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
