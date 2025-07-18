@@ -1,9 +1,9 @@
 {% extends "hello/layout.html" %}
 {% block content %}
-    <h2>Add Movie</h2>
+    <h2>{% if edit %}Edit Movie{% else %}Add Movie{% endif %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add</button>
+        <button type="submit">{% if edit %}Save Changes{% else %}Add{% endif %}</button>
     </form>
 {% endblock %}

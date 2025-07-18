@@ -37,6 +37,17 @@ def add_movie(request):
         form = MovieForm()
     return render(request, "hello/add_movie.html", {"form": form})
 
+def edit_movie(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method == "POST":
+        form = MovieForm(request.POST, instance=movie)
+        if form.is_valid():
+            form.save()
+            return redirect("movie_list")
+    else:
+        form = MovieForm(instance=movie)
+    return render(request, "hello/add_movie.html", {"form": form, "edit": True, "movie": movie})
+
 def delete_movie(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     movie.delete()

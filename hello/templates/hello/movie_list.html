@@ -11,10 +11,16 @@
                 <h3>{{ movie.name }}</h3>
                 <div class="movie-rating">⭐ {{ movie.rating }}</div>
                 <div class="movie-date">{{ movie.release_date }}</div>
-                <form method="post" action="{% url 'delete_movie' movie.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="delete-btn">Delete</button>
-                </form>
+                <div class="movie-actions">
+                    <form method="post" action="{% url 'delete_movie' movie.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                    <a href="{% url 'edit_movie' movie.pk %}" class="edit-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:middle;margin-right:4px;"><path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-9.439 9.439a.5.5 0 0 1-.168.11l-4 1.5a.5.5 0 0 1-.65-.65l1.5-4a.5.5 0 0 1 .11-.168l9.439-9.439zm.708-.708a1.5 1.5 0 0 0-2.121 0l-9.439 9.439a1.5 1.5 0 0 0-.329.504l-1.5 4A1.5 1.5 0 0 0 2.5 16a1.5 1.5 0 0 0 .504-.329l4-1.5a1.5 1.5 0 0 0 .504-.329l9.439-9.439a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/></svg>
+                        Edit
+                    </a>
+                </div>
             </div>
         </div>
         {% empty %}
