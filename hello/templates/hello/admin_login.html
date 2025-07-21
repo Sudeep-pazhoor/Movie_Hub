@@ -1,0 +1,26 @@
+{% extends 'hello/layout.html' %}
+{% block content %}
+<div style="max-width:350px;margin:60px auto;padding:32px;background:#232323;border-radius:12px;box-shadow:0 2px 16px #00e6e6;">
+    <h2 style="text-align:center;">Admin Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div style="margin-bottom:16px;">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" style="width:100%;padding:8px;">
+        </div>
+        <div style="margin-bottom:16px;">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" style="width:100%;padding:8px;">
+        </div>
+        <button type="submit" class="add-btn" style="width:100%;">Login</button>
+    </form>
+    {% if messages %}
+        <ul style="color:#ff4d4d;list-style:none;padding:0;margin-top:16px;">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %} 

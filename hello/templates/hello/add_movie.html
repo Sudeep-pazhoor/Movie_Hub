@@ -1,9 +1,16 @@
 {% extends "hello/layout.html" %}
 {% block content %}
-    <h2>{% if edit %}Edit Movie{% else %}Add Movie{% endif %}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">{% if edit %}Save Changes{% else %}Add{% endif %}</button>
-    </form>
+    {% if not request.session.is_admin %}
+        <div style="text-align:center;margin:60px auto;max-width:400px;background:#232323;padding:32px;border-radius:12px;box-shadow:0 2px 16px #00e6e6;">
+            <h2>Admin Only</h2>
+            <p>You must be logged in as admin to access this page.</p>
+        </div>
+    {% else %}
+        <h2>{% if edit %}Edit Movie{% else %}Add Movie{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{% if edit %}Save Changes{% else %}Add{% endif %}</button>
+        </form>
+    {% endif %}
 {% endblock %}

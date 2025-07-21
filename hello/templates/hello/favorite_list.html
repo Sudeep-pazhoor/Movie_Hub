@@ -11,10 +11,12 @@
                 <h3>{{ movie.name }}</h3>
                 <div class="movie-rating">⭐ {{ movie.rating }}</div>
                 <div class="movie-date">{{ movie.release_date }}</div>
+                {% if request.session.is_admin %}
                 <form method="post" action="{% url 'delete_movie' movie.pk %}">
                     {% csrf_token %}
                     <button type="submit" class="delete-btn">Delete</button>
                 </form>
+                {% endif %}
             </div>
         </div>
         {% empty %}

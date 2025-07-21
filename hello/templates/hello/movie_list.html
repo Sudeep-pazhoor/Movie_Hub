@@ -1,6 +1,8 @@
 {% extends "hello/layout.html" %}
 {% block content %}
+    {% if request.session.is_admin %}
     <a href="{% url 'add_movie' %}" class="add-btn">+ Add Movie</a>
+    {% endif %}
     <div class="card-container">
         {% for movie in movies %}
         <div class="movie-card">
@@ -11,6 +13,7 @@
                 <h3>{{ movie.name }}</h3>
                 <div class="movie-rating">⭐ {{ movie.rating }}</div>
                 <div class="movie-date">{{ movie.release_date }}</div>
+                {% if request.session.is_admin %}
                 <div class="movie-actions">
                     <form method="post" action="{% url 'delete_movie' movie.pk %}" style="display:inline;">
                         {% csrf_token %}
@@ -21,6 +24,7 @@
                         Edit
                     </a>
                 </div>
+                {% endif %}
             </div>
         </div>
         {% empty %}
